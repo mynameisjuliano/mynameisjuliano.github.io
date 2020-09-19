@@ -10,7 +10,7 @@ Prerequisites:
 
 Steps:
 Get a macOS dmg. You can obtain a copy from another macOS or you can download older versions from Apple's official website.
-For example you can download *Yosemite* from !(here)[https://support.apple.com/en-us/HT210717]
+For example you can download *Yosemite* from [here](https://support.apple.com/en-us/HT210717)
 
 It is recommended that you make a folder so as not to make a mess. You can make one anywhere, and move the downloaded ``.dmg`` file in there.
 Open the command prompt (or powershell) in that directory.
@@ -40,3 +40,7 @@ After that, wait for around 20 minutes. Then viola! You have a working macOS boo
 
 ### Issues:
 - If you have made a bootable usb lower that your last installed macOS, you will have a *no entry* sign which means prohibited. Try downloading another DMG with a higher version.
+
+### Credits
+notthebee for his ``macos_usb`` script from which I derived the commands to use. 
+https://github.com/notthebee/macos_usb/
