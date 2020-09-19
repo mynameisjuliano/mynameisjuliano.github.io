@@ -20,15 +20,15 @@ $ ``7z e <macOS DMG file>``
 
 and then wait for a while, after that you'll get a file named (or similar to) ``InstallMacOS.pkg``. We will also extract it, type in your commandline:
 
-$ ``7z e -xtar <InstallMacOS.pkg file> *.dmg``
+$ ``7z e -txar <InstallMacOS.pkg file> "*.dmg" -r``
 
 You'll result a ``InstallESD.dmg``, or something similarly named. You guessed it, we will also extract it. We can do so using:
 
-$ ``7z e <InstallESD.dmg> */Base*``
+$ ``7z e <InstallESD.dmg> "*/Base*" -r``
 
 You will then get a file named ``BaseSystem.dmg`` or something also similarly named. This is the last time we will do an extraction. We can that by using:
 
-$ ``7z e -tdmg BaseSystem.dmg *.hfs``
+$ ``7z e -tdmg BaseSystem.dmg "*.hfs" -r``
 
 After so, a file starting with a number and ending with ``.hfs`` will appear (for example 3.hfs, 4.hfs, etc). Keep in mind where it is in stored, it is time to leave the terminal.
 
