@@ -8,4 +8,4 @@ of products from suppliers, there is nothing else.
 
 The developers of this application deeply respects its user's privacy, so we assure you that any data that we collect will not be used for marketing, or malicious purposes.
 
-*March 28, 2023*
+*March 28, 2023*; *updated September 20, 2023.*
