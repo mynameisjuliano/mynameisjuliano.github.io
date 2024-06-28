@@ -6,4 +6,4 @@ I write stuff, I witness to people about the Bible—I'm one of Jehovah's Witnes
 My tutorial about making macOS usb in Windows, read it [here](extra/macusb_tutorial.md)
 #### Blogs
 - **2023**
-  - [Poems/Stuff](blogs/poems.md)
+  - [Poems/Stuff](blog/poems.md)
