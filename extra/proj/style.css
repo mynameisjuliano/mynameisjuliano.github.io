@@ -1,0 +1,172 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+input {
+	border: 3px solid black; 
+	border-radius: 20px;
+	padding: 15px;
+	font-size: 1.3em;
+	background: #eeeeee;
+}
+label {
+	font-family: sans-serif;
+	font-variant: small-caps;
+	/* text-transform: uppercase; */
+}
+p {
+	font-family: sans-serif;
+}
+.popup {
+	margin: auto; 
+	background: #00000022;
+	position: absolute;
+	width: 100%;
+	z-index: 1;
+	visibility: hidden;
+}
+.filler {
+	width: 100%;
+}
+.text-st {
+	width: 100%;
+	font-weight: bold;
+	font-size: 2em;
+	font-variant: small-caps;
+	font-family: sans;
+}
+.plain-text-button {
+	font-weight: bold;
+	font-size: 1.2em;
+	text-align: center;
+	background: none;
+	border: none;
+}
+.text-highlight-option {
+	border-radius: 20px;
+	padding: 15px 30px;
+	font-size: 1.3em;
+	background: purple;
+	border: 2px solid black;
+	color: white;
+	margin: 20px;
+}
+.row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin: 10px;
+}
+.main-window {
+	margin:5%; 
+	border: 3px solid black;
+	border-radius: 50px; 
+	padding: 5%; 
+	background: white;
+}
+.grade-input {
+	font-size: 1em;
+	width: 100px;
+	margin: 0px;
+}
+.name-row {
+	display: flex;
+	flex-direction: row;
+}
+.name-lgroup {
+	display: flex;
+	flex-direction: column;
+	margin: 10px;
+}
+.l {
+	font-weight: bold;
+	font-size: 1em;
+}
+.section {
+	font-weight: bold;
+	font-size: 2em;
+	background: lightblue;
+	border-radius: 25px;
+	border: 2px solid black;
+	padding: 20px;
+	margin: 10px;
+	margin-top: 40px;
+	margin-bottom: 0px;
+	display: flex;
+	flex-direction: row;
+}
+.g-row {
+	display: flex;
+	flex-direction: column;
+}
+.g-row-odd {
+	margin: 2px;
+	background: lightblue;
+	border-radius: 25px;
+	padding: 20px;
+	font-weight: bold;
+	display: flex;
+	flex-direction: row;
+	/* border: 2px solid black; */
+}
+.g-row-even {
+	border-radius: 25px;
+	color: white;
+	background: purple;
+	padding: 20px;
+	margin: 2px;
+	font-weight: bold;
+	display: flex;
+	flex-direction: row;
+	/* border: 2px solid gray; */
+}
+.g-row-average {
+	border-radius: 25px;
+	color: black;
+	background: white;
+	padding: 20px;
+	margin: 50px 2px 2px 2px;
+	font-weight: bold;
+	display: flex;
+	flex-direction: row;
+	border: 4px solid black;
+}
+.g-label{
+	width: 100%;
+	font-size: 1.2em;
+}
+.g-container {
+	margin: 10px;
+	padding: 0 10px;
+	overflow-y: scroll;
+	height: 50%;
+}
+.s-container {
+	margin: 10px;
+	padding: 0 10px;
+	overflow-y: scroll;
+}
+.s-section {
+	font-weight: bold;
+	font-size: 1em;
+	background: lightblue;
+	border-radius: 25px;
+	border: 2px solid black;
+	padding: 20px;
+	margin: 10px;
+	margin-top: 40px;
+	margin-bottom: 0px;
+	display: flex;
+	flex-direction: row;
+}
+.s-container {
+	border-radius: 25px;
+	color: black;
+	background: white;
+	padding: 20px;
+	margin: 10px;
+	font-weight: bold;
+	display: flex;
+	flex-direction: column;
+	border: 4px solid black;
+}
