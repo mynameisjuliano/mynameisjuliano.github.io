@@ -1,0 +1,75 @@
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<script src="script.js"></script>
+		<script>
+			window.onload = function(){
+				reload_student_list();
+			}
+		</script>
+	<link rel="stylesheet" href="style.css"/>
+	</head>
+	<body>
+
+	<div id="popup_bg" class="popup">
+	<div class="main-window">
+		<div class="row">
+			<p class="text-st">Student profile</p>
+			<!--make this unicode!-->
+			<button class="plain-text-button" onclick="close_display()">✖</button> 
+		</div>
+		<div class="name-row">
+			<div class="name-lgroup">
+			<label class="l" for="fname">First name</label>
+			<input id="fname"/>
+			</div>
+			<div class="name-lgroup">
+			<label class="l" for="lname">Last name</label>
+			<input id="lname"/>
+			</div>
+		</div>
+
+		<div class="name-lgroup">
+			<label class="l" for="idno">
+				Learner's Reference Number</label>
+			<input id="idno" type="number"/>
+		</div>
+
+		<p class="section">Grades</p>
+		<div id="g-container" class="g-container"></div>
+		<hr/>
+		<p>&#x2022; click on <b>Average</b> to recalculate.</p>
+		<div class="row">
+			<button class="text-highlight-option" onclick="close_display_save(s_student)">Save</button>
+			<button class="plain-text-button" onclick="close_display()">Cancel</button>
+			<p class="filler"/>
+			<button class="plain-text-button" onclick="delete_student(s_student)">Delete</button>
+
+		</div>
+		</div>	
+	</div>
+	</div>
+	<div>
+		<div class="s-section">
+			<p class="text-st">Student list</p>
+			<select class="text-highlight-option" 
+				id="arrangement"
+				onchange="reload_student_list()">
+				<option value="avg-high">
+				Average </option>
+				<!--<option value="avg-low">-->
+				<!--Average (lowest)</option>-->
+				<option value="last-name">
+				Last name </option>
+				<option value="first-name">
+				First name </option>
+			</select>
+			<!--<input type="radio" id="last-name" name="arrange_type"/>-->
+			<!--<label for="last-name">Last name</label>-->
+		</div>
+		<div class="s-container" id="student-con">
+		</div>
+		<button class="text-highlight-option" onclick='open_profile_display(new_student("", "", 0))'>New student</button>
+	</div>
+	</body>
+</html>
