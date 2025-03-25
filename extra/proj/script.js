@@ -201,6 +201,14 @@ function open_profile_display(student_info) {
 		input.className = "grade-input";
 		input.setAttribute("type", "number");
 		input.setAttribute("value", grades.grade);
+		//input.setAttribute("min", 75);
+		//input.setAttribute("max", 100);
+
+		input.addEventListener("change", function() {
+			var v = parseInt(this.value);
+			if(v < 75) this.value = 75;
+			if(v > 100) this.value = 100;
+		});
 		input.setAttribute("id", "grade-" + grades.name);
 
 		if(is_average) {
@@ -295,7 +303,6 @@ function display_student_list(list) {
 
 		label.onclick = function() {
 			var st = this.stu;
-			//alert(st);
 			open_profile_display(st);
 		}
 
@@ -303,7 +310,6 @@ function display_student_list(list) {
 		input.className = "grade-input";
 		input.setAttribute("type", "number");
 		input.setAttribute("value", get_student_average(student));
-		//input.setAttribute("id", "grade-" + grades.name);
 		row.appendChild(label);
 		row.appendChild(input);
 
@@ -330,4 +336,31 @@ function reload_student_list() {
 	display_student_list(copy);
 }
 
+//var student_test, student_test_2, student_test_3;
+function _deploy_not() {
+	var student_test = new_student("olfter'Jeff", "Bona-Person", 1928321);
+	student_test["grades"][0]["grade"] = 90;
+	student_test["grades"][1]["grade"] = 90;
+	student_test["grades"][2]["grade"] = 90;
+
+	var student_test_2 = new_student("BounfJoseph", "M'DPerson", 1928321);
+	student_test_2["grades"][0]["grade"] = 90;
+	student_test_2["grades"][1]["grade"] = 95;
+	student_test_2["grades"][2]["grade"] = 90;
+
+	var student_test_3 = new_student("Andergeoff", "Ferrison", 1928321);
+	student_test_3["grades"][0]["grade"] = 90;
+	student_test_3["grades"][1]["grade"] = 96;
+	student_test_3["grades"][2]["grade"] = 90;
+
+	var list2 = copyStudentsList();
+	//sort_students_by_average(list2, "lowest");
+	//sort_students_by_average(list2, "highest");
+	sort_students_by_last_name(list2);
+	for(let i of list2) {
+		console.log(i["firstName"] + " " + i["lastName"]);
+	}
+}
+
+//_deploy_not();
 
