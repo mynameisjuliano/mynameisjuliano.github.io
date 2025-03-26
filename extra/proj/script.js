@@ -294,10 +294,17 @@ function display_student_list(list) {
 		if(odd) { m_t = "odd" }; 
 		
 		var student = list[i];
+
+
+		if(student["lastName"] == "" && student["firstName"] == "") {
+			continue;
+		}
+
 		var row = document.createElement("div");
 		row.className = "g-row-" + m_t;
 		
 		var label = document.createElement("p");
+
 		label.className = "g-label";
 		label.innerHTML = student["lastName"] + ", " + 
 			student["firstName"];
