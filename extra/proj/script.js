@@ -264,12 +264,14 @@ function display_save(student_info) {
 }
 
 function close_display(){
+	window.scrollTo(0, 0);
 	document.getElementById("popup_bg").style.visibility = "hidden";
 	if(s_student["firstName"] == "" && s_student["lastName"] == "") {
 		Students.delete_student(s_student);
 	}
 
 	reload_student_list();
+
 }
 
 
