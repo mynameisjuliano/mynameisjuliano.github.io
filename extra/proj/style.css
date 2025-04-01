@@ -1,13 +1,26 @@
-body {
-	margin: 0;
-	padding: 0;
+/* found at stackoverflow */
+html {
+	width: 100%;
+	height: 100vh;
+	display: table;
+	/* padding: 5%; */
 }
+body {
+	width: 80%;
+	display: table-cell;
+	text-align: center;
+	/* min-height: 100%; */
+	/* height: 100%; */
+	/* padding: 5%; */
+}
+html, body {margin:0; padding:0}
 input {
-	border: 3px solid black; 
-	border-radius: 20px;
+	border: 3px solid black;
+	border-radius: 30px;
 	padding: 15px;
 	font-size: 1.3em;
 	background: #eeeeee;
+	max-width: 180px;
 }
 label {
 	font-family: sans-serif;
@@ -17,13 +30,14 @@ label {
 p {
 	font-family: sans-serif;
 }
-.popup {
-	margin: auto; 
+.profile-popup {
+	margin: auto;
 	background: #00000022;
 	position: absolute;
-	width: 100%;
-	z-index: 1;
+	/* max-width: 2450px; */
+	z-index: 3;
 	visibility: hidden;
+	width: 100%;
 }
 .filler {
 	width: 100%;
@@ -33,7 +47,7 @@ p {
 	font-weight: bold;
 	font-size: 2em;
 	font-variant: small-caps;
-	font-family: sans;
+	font-family: sans-serif;
 }
 .plain-text-button {
 	font-weight: bold;
@@ -43,26 +57,60 @@ p {
 	border: none;
 }
 .text-highlight-option {
-	border-radius: 20px;
-	padding: 15px 30px;
+	border-radius: 30px;
+	padding: 15px;
 	font-size: 1.3em;
-	background: purple;
+	background: lightgreen;
 	border: 2px solid black;
-	color: white;
+	color: darkgreen;
 	margin: 20px;
 }
+.text-failed {
+	border-radius: 30px;
+	padding: 10px 10px;
+	/* font-size: 1em; */
+	background: red;
+	border: 2px solid black;
+	color: white;
+	margin: 10px;
+}
+.text-passed {
+	border-radius: 30px;
+	padding: 10px 10px;
+	/* font-size: 1em; */
+	background: lightgreen;
+	border: 2px solid black;
+	color: darkgreen;
+	margin: auto 10px;
+}
+
 .row {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	margin: 10px;
 }
-.main-window {
-	margin:5%; 
+
+.title-row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin: 10px 1px;
+	padding: 10px 20px;
+	border-radius: 50px;
+	border: 1px solid black
+}
+
+.popup-window {
+	margin:2% auto;
 	border: 3px solid black;
-	border-radius: 50px; 
-	padding: 5%; 
+	border-radius: 50px;
+	padding: 2.5%;
+	/* padding-top: 3%; */
 	background: white;
+	width: 480px;
+	height: 80vh;
+	/* max-width: 2450px; */
 }
 .grade-input {
 	font-size: 1em;
@@ -86,11 +134,12 @@ p {
 	font-weight: bold;
 	font-size: 2em;
 	background: lightblue;
-	border-radius: 25px;
+	border-radius: 30px;
 	border: 2px solid black;
-	padding: 20px;
+	padding: 10px;
+	padding-left: 20px;
 	margin: 10px;
-	margin-top: 40px;
+	/* margin-top: px; */
 	margin-bottom: 0px;
 	display: flex;
 	flex-direction: row;
@@ -102,30 +151,33 @@ p {
 .g-row-odd {
 	margin: 2px;
 	background: lightblue;
-	border-radius: 25px;
-	padding: 20px;
+	border-radius: 40px;
+	padding: 10px;
+	padding-left: 20px;
 	font-weight: bold;
 	display: flex;
 	flex-direction: row;
-	/* border: 2px solid black; */
+	border: 2px solid black;
 }
 .g-row-even {
-	border-radius: 25px;
-	color: white;
-	background: purple;
-	padding: 20px;
+	color: darkgreen;
+	background: lightgreen;
+	border-radius: 40px;
+	padding: 10px;
+	padding-left: 20px;
 	margin: 2px;
 	font-weight: bold;
 	display: flex;
 	flex-direction: row;
-	/* border: 2px solid gray; */
+	border: 2px solid darkgreen;
 }
 .g-row-average {
-	border-radius: 25px;
+	border-radius: 44px;
 	color: black;
 	background: white;
-	padding: 20px;
-	margin: 50px 2px 2px 2px;
+	padding: 10px;
+	/* margin: 40px 2px 2px 2px; */
+	margin: 5px;
 	font-weight: bold;
 	display: flex;
 	flex-direction: row;
@@ -138,21 +190,25 @@ p {
 .g-container {
 	margin: 10px;
 	padding: 0 10px;
-	/*overflow-y: scroll;*/
-	height: 50%;
+	overflow-y: scroll;
+	height: 20vh;
 }
 .s-container {
 	margin: 10px;
 	padding: 0 10px;
 	/*overflow-y: scroll;*/
 }
+
 .s-section {
 	font-weight: bold;
 	font-size: 1em;
+	font-family: serif;
 	background: lightblue;
-	border-radius: 25px;
+	color: white;
+	border-radius: 50px;
 	border: 2px solid black;
-	padding: 20px;
+	padding: 10px;
+	padding-left: 50px;
 	margin: 10px;
 	margin-top: 40px;
 	margin-bottom: 0px;
@@ -160,7 +216,7 @@ p {
 	flex-direction: row;
 }
 .s-container {
-	border-radius: 25px;
+	border-radius: 50px;
 	color: black;
 	background: white;
 	padding: 20px;
@@ -171,6 +227,31 @@ p {
 	border: 4px solid black;
 }
 
+.login-error {
+	font-weight: bold;
+	font-style: italic;
+	color: red;
+	margin: 0 20px;
+	padding: 18px;
+	border-radius: 20px;
+	border: 2px solid red;
+	width: 60%;
+	visibility: collapse;
+}
+
+.login-div {
+	width: 80%;
+	margin: auto;
+	z-index: 0;
+	position: absolute;
+}
+
+#s-list {
+	z-index: 1;
+	position: absolute;
+	width: 80%;
+	margin: auto;
+}
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
