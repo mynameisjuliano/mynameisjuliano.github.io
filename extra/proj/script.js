@@ -27,8 +27,8 @@ var SubjectList = [
 	{"name": "Java/HTML", "major":1},
 	{"name": "Visual Fox Pro", "major":1},
 	{"name": "Database Mgmnt.", "major":1},
-	{"name": "CSS2", "major":1},
-	{"name": "SAD", "major":1},
+	{"name": "C.S.S. 2", "major":1},
+	{"name": "S.A.D.", "major":1},
 	{"name": "Photoshop", "major":1},
 	// Minor
 	{"name": "B.E.C.", "major":0},
@@ -39,7 +39,7 @@ var SubjectList = [
 
 var Users = [
 	{"name": "admin", "pass":"password"},
-	{"name": "teacher", "pass":"password"},
+	{"name": "teacher", "pass":"teac123"}
 ]
 
 /* list of created students. */
@@ -55,7 +55,9 @@ function copyStudentsList() {
 	return copyList;
 }
 
+var logged_in = false;
 function login(pass) {
+
 	var unamei = document.getElementById("username");
 	var pwordi = document.getElementById("pass");
 	var pass_error = document.getElementById("pass-error-msg");
@@ -70,10 +72,12 @@ function login(pass) {
 		login_div.style.visibility = "hidden";
 		pass_error.style.visibility = "hidden";
 		s_list.style.visibility = "visible";
+		reload_student_list();
 	}
 
 	if(pass) {
 		new_screen();
+		logged_in = true;
 		return;
 	}
 
@@ -88,7 +92,7 @@ function login(pass) {
 	if(username === "" || username == null) {
 		pass_error.innerHTML = "Please input username";
 		pass_error.style.visibility = "visible";
-
+_
 		return;
 	}
 
@@ -96,8 +100,47 @@ function login(pass) {
 		var user = Users[i];
 		if(user.name == username) {
 			if(user.pass == pword) {
-				new_screen();
-				alert("Login sucessful");
+				// alert("Login sucessful");
+				pass_error.innerHTML = "Logging in";
+				pass_error.style.visibility = "visible";
+				pass_error.className = "login-success"
+				var delayCount = 0;
+
+				var coreFunction = function(func) {
+					if(delayCount > 40) {
+						new_screen();
+					} else {
+						var loader = [
+							"◐",
+							"◓",
+							"◑",
+							"◒"
+						];
+						var count = delayCount % loader.length;
+						// var loader = ['⠾', '⠽', '⠻','⠯', '⠷'];
+						// var loader = [
+						// 	'⠁',
+						// 	'⠃',
+						// 	'⠂',
+						// 	'⠆',
+						// 	'⠄',
+						// 	'⠤',
+						// 	'⠠',
+						// 	'⠰',
+						// 	'⠐',
+						// 	'⠘',
+						// 	'⠈',
+						// 	'⠉'
+						// ]
+						pass_error.innerHTML = "Logging in " + loader[count];
+						window.setTimeout(function() {func(func)}, 50);
+					}
+
+					delayCount++;
+				}
+				window.setTimeout(function() {coreFunction(coreFunction)}, 300)
+				// new_screen()
+				logged_in = true;
 				return;
 			} else {
 				pass_error.innerHTML = "Invalid password";
@@ -119,6 +162,7 @@ function new_student(firstName, lastName, lrn) {
 		"lastName": lastName,
 		"lrn": lrn,
 		"schoolyear": new Date().getFullYear()
+		// "changed": false
 	};
 	/* make a prototype, with name "grades." */
 	student_info["grades"] = [];
@@ -142,7 +186,7 @@ function new_student(firstName, lastName, lrn) {
 	}
 
 	// command to add to list.
-	Students.push(student_info);
+	// Students.push(student_info);
 	return student_info;
 }
 
@@ -269,18 +313,22 @@ function open_grade_summary(grade) {
 	g_popup.style.visibility = "visible";
 	var g_sum_subname = document.getElementById("g-sum-subject");
 	g_sum_subname.innerHTML = grade.name;
+	g_popup.addEventListener("key", function() {
+
+	})
 
 	var input_perfmnc = document.getElementById("g-performance");
 	var input_activities = document.getElementById("g-activities");
 	var input_quizzes = document.getElementById("g-quizzes");
 	var input_absent = document.getElementById("g-absent");
-	var input_present = document.getElementById("g-present");
+	// var input_present = document.getElementById("g-present");
 
 	input_perfmnc.value = parseInt(grade.performance);
 	input_activities.value = parseInt(grade.activities);
 	input_quizzes.value = parseInt(grade.quizzes);
 	input_absent.value = parseInt(grade.absent_months);
-	input_present.value = parseInt(grade.present_months);
+	// alert(grade.absent_months);
+	// input_present.value = parseInt(grade.present_months);
 
 	function calculate_grade() {
 		var input_t_grade = document.getElementById("g-total-grades");
@@ -288,8 +336,35 @@ function open_grade_summary(grade) {
 		// TODO: So that display_save() can access it.
 
 		// TODO: Directly update the average display
+		if(this.value > 100) {
+			this.value = 100;
+		} else if(this.value < 0) {
+			this.value = 0;
+		}
+
 		var grade_profile_input = document.getElementById("grade-" + grade.name);
+		var perfrmnc = input_perfmnc.value * 0.4;
+		var activities = input_activities.value * 0.2;
+		var quizzes = input_quizzes.value * 0.2;
+		var attendance = ( (12 - input_absent.value) / 12) * 100 * 0.2;
+
+		var t_grade = Math.floor(perfrmnc + activities + quizzes + attendance);
+		input_t_grade.value = t_grade;
+		grade.total_grade = t_grade;
+		grade_profile_input.value = t_grade;
+		// relying on this to be consistent.
+		// grade_profile_input.onchange();
+
+		if(grade_profile_input.onchange != null) {
+			grade_profile_input.onchange();
+		}
 	}
+
+	input_perfmnc.onchange = calculate_grade;
+	input_activities.onchange = calculate_grade;
+	input_quizzes.onchange = calculate_grade;
+	input_absent.onchange = calculate_grade;
+	calculate_grade();
 	s_grade = grade;
 }
 
@@ -301,7 +376,7 @@ function close_grade_summary() {
 	var input_activities = document.getElementById("g-activities");
 	var input_quizzes = document.getElementById("g-quizzes");
 	var input_absent = document.getElementById("g-absent");
-	var input_present = document.getElementById("g-present");
+	// var input_present = document.getElementById("g-present");
 	var input_t_grade = document.getElementById("g-total-grades");
 
 	// assuming there's s[elected]_grade
@@ -310,10 +385,10 @@ function close_grade_summary() {
 		s_grade.activities = parseInt(input_activities.value);
 		s_grade.quizzes = parseInt(input_quizzes.value);
 		s_grade.absent_months = parseInt(input_absent.value);
-		s_grade.present_months = parseInt(input_present.value);
+		// s_grade.present_months = parseInt(input_present.value);
 		s_grade.total_grade = parseInt(input_t_grade.value);
 	}
-	save();
+	// save();
 }
 
 
@@ -327,6 +402,8 @@ function open_profile_display(student_info) {
 	var lname = document.getElementById("lname");
 	var lrninput = document.getElementById("idno");
 	var sy = document.getElementById("schoolyear");
+	var passed = document.getElementById("g-passed");
+	var label = document.getElementById("student-label");
 	var gcontainer = document.getElementById("g-container");
 
 	fname.value = student_info["firstName"];
@@ -339,15 +416,70 @@ function open_profile_display(student_info) {
 	}
 
 	var average_input = document.getElementById("g-average");
+	var avg = Math.floor(get_student_average(student_info));
 
+	var update_info_pass = function(avg) {
+		if(avg < 75) {
+			passed.innerHTML = "Has Failing Grade";
+			passed.className = "text-failed"
+		} else {
+			passed.innerHTML = "PASS";
+			passed.className = "text-passed"
+		}
+
+	}
 	var display_average = function() {
+		// TODO: little fishy
+		var a = Math.floor(get_student_average(student_info));
+		average_input.value = a;
+		update_info_pass(a);
 		display_save(student_info);
-		avg = get_student_average(student_info);
-		average_input.value = avg;
+	}
+	update_info_pass(avg);
+
+
+
+	function change_label() {
+		var label = document.getElementById("student-label");
+		var lName = document.getElementById("lname");
+		var fName = document.getElementById("fname");
+
+		var lastName = lName.value;
+		var firstName = fName.value;
+
+		if(lastName == "" && firstName == "") {
+			label.innerHTML = "<em>Unnamed Student</em>";
+		} else {
+			if(lastName == "") {
+				label.innerHTML = firstName;
+			} else if(firstName == "") {
+				label.innerHTML = lastName;
+			} else {
+				label.innerHTML = firstName + " " + lastName;
+			}
+		}
 	}
 
+	fname.onkeyup = change_label;
+	lname.onkeyup = change_label;
+
+	if(student_info["lastName"] == "" && student_info["firstName"] == "") {
+		label.innerHTML = "<em>Unnamed Student</em>";
+	} else {
+		if(student_info["lastName"] == "") {
+			label.innerHTML = student_info["firstName"];
+		} else if(student_info["firstName"] == "") {
+			label.innerHTML = student_info["lastName"];
+		} else {
+			label.innerHTML = student_info["lastName"] +
+				", " + student_info["firstName"];
+		}
+	}
+
+
+
 	document.getElementById("g-avg-row").onclick = display_average;
-	average_input.value = get_student_average(student_info);
+	average_input.value = parseInt(get_student_average(student_info));
 
 	for(var i = 0; i < student_info["grades"].length; i++) {
 		var odd = i % 2 == 0;
@@ -370,12 +502,12 @@ function open_profile_display(student_info) {
 		input.setAttribute("readonly", true);
 		// input.readOnly = true;
 		// TODO: Deprecated.
-		input.addEventListener("change", function() {
+		input.onchange = function() {
 			var v = parseInt(this.value);
-			if(v < 75) this.value = 75;
+			if(v < 0) this.value = 0;
 			if(v > 100) this.value = 100;
 			display_average();
-		});
+		};
 
 		row.className = "g-row-" + m_t;
 		row.onclick = function() {
@@ -423,16 +555,22 @@ function display_save(student_info) {
 		grades["total_grade"] = grade;
 	}
 
+	if(Students.includes(student_info) != true) {
+		Students.push(student_info);
+	}
+
 }
 
 function close_profile_display(){
 	window.scrollTo(0, 0);
 	document.getElementById("popup_bg").style.visibility = "hidden";
-	if(s_student["firstName"] == "" && s_student["lastName"] == "") {
+
+	if(s_student["firstName"] == "" && s_student["lastName"] == "" && s_student["new"] == true) {
 		delete_student(s_student);
 	}
 
 	reload_student_list();
+	save();
 }
 
 
@@ -443,12 +581,14 @@ function close_profile_display_save(student_info) {
 
 function display_student_list(list) {
 	scontainer = document.getElementById("student-con");
+	var s_parent = document.getElementById("s-con")
+
 	if(list.length < 1) {
-		scontainer.style.visibility = "hidden";
-		scontainer.style.height = "0%";
-	} else {
-		scontainer.style.visibility = "visible";
-		scontainer.style.height = "inherit";
+	s_parent.style.visibility = "hidden";
+		s_parent.style.height = "0";
+	} else if(logged_in) {
+		s_parent.style.visibility = "visible";
+		s_parent.style.height = "inherit";
 	}
 
 	while(scontainer.firstChild) {
@@ -463,19 +603,28 @@ function display_student_list(list) {
 
 		var student = list[i];
 
-		/* TODO:  See why this can still loop despite having undefined*/
-		if(student["lastName"] == "" && student["firstName"] == "") {
-			continue;
-		}
-
 		var row = document.createElement("div");
 		row.className = "g-row-" + m_t;
 
 		var label = document.createElement("p");
 
 		label.className = "g-label";
-		label.innerHTML = student["lastName"] + ", " +
-			student["firstName"];
+		if(student["lastName"] == "" && student["firstName"] == "") {
+			label.innerHTML = "<em>Unnamed Student</em>";
+
+		} else {
+			if(student["lastName"] == "") {
+				label.innerHTML = "<em>[X]</em>, " +
+					student["firstName"];
+			} else if(student["firstName"] == "") {
+				label.innerHTML = student["lastName"] +
+					", <em>[?]</em>";
+			} else {
+				label.innerHTML = student["lastName"] +
+					", " + student["firstName"];
+			}
+		}
+
 		label.stu = student
 
 		label.onclick = function() {
@@ -486,7 +635,7 @@ function display_student_list(list) {
 		var input = document.createElement("input");
 		input.className = "grade-input";
 		input.setAttribute("type", "number");
-		input.setAttribute("value", get_student_average(student));
+		input.setAttribute("value", parseInt(get_student_average(student)));
 		row.appendChild(label);
 		row.appendChild(input);
 
@@ -510,7 +659,6 @@ function reload_student_list() {
 			break;
 	}
 
-	save();
 	display_student_list(copy);
 }
 

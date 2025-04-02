@@ -17,8 +17,8 @@ html, body {margin:0; padding:0}
 input {
 	border: 3px solid black;
 	border-radius: 30px;
-	padding: 15px;
-	font-size: 1.3em;
+	padding: 10px;
+	font-size: 1em;
 	background: #eeeeee;
 	max-width: 180px;
 }
@@ -51,28 +51,29 @@ p {
 }
 .plain-text-button {
 	font-weight: bold;
-	font-size: 1.2em;
+	font-size: 1em;
 	text-align: center;
 	background: none;
 	border: none;
 }
 .text-highlight-option {
-	border-radius: 30px;
-	padding: 15px;
+	border-radius: 25px;
+	padding: 10px;
 	font-size: 1.3em;
 	background: lightgreen;
 	border: 2px solid black;
 	color: darkgreen;
-	margin: 20px;
+	margin: 10px;
 }
 .text-failed {
 	border-radius: 30px;
 	padding: 10px 10px;
 	/* font-size: 1em; */
-	background: red;
+	background: darkred;
 	border: 2px solid black;
 	color: white;
 	margin: 10px;
+	font-weight: bold;
 }
 .text-passed {
 	border-radius: 30px;
@@ -115,6 +116,9 @@ p {
 .grade-input {
 	font-size: 1em;
 	width: 100px;
+	padding: 10px;
+	padding-left: 10px;
+	border-radius: 50px;
 	margin: 0px;
 }
 .name-row {
@@ -190,8 +194,17 @@ p {
 .g-container {
 	margin: 10px;
 	padding: 0 10px;
+	max-height: 10vh;
+}
+.g-sum-container {
+	margin: 10px;
+	padding: 0 10px;
+	max-height: 100%;
+	height: 100%;
+}
+.scroll-y {
 	overflow-y: scroll;
-	height: 20vh;
+	min-height: 5%;
 }
 .s-container {
 	margin: 10px;
@@ -222,16 +235,22 @@ p {
 	padding: 20px;
 	margin: 10px;
 	font-weight: bold;
-	display: flex;
-	flex-direction: column;
 	border: 4px solid black;
+	/* max-height: 29vh; */
+	/* overflow-y: scroll; */
+}
+#student-con {
+	max-height: 51vh;
+	border-radius: 30px;
+	overflow-y: auto;
+	padding-right: 1px;
 }
 
 .login-error {
 	font-weight: bold;
 	font-style: italic;
 	color: red;
-	margin: 0 20px;
+	margin: 10px auto;
 	padding: 18px;
 	border-radius: 20px;
 	border: 2px solid red;
@@ -239,19 +258,44 @@ p {
 	visibility: collapse;
 }
 
+.login-success {
+	color: green;
+	border: 2px solid green;
+	font-weight: bold;
+	font-style: italic;
+	margin: 10px auto;
+	padding: 18px;
+	border-radius: 20px;
+	width: 60%;
+}
+
 .login-div {
-	width: 80%;
+	width: 50%;
 	margin: auto;
-	z-index: 0;
-	position: absolute;
+	position: relative;
+}
+
+#pass,#username {
+	margin: auto;
+	display: block;
 }
 
 #s-list {
-	z-index: 1;
-	position: absolute;
-	width: 80%;
 	margin: auto;
+	z-index: 1;
+	position: relative;
+	width: 50%;
 }
+.s-list-btn-row {
+	margin: auto;
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	/* width: 50%; */
+
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

@@ -17,50 +17,55 @@
 	<div id="popup-grades-bg" class="profile-popup" style="z-index: 4;">
 	<div class="popup-window">
 		<div class="title-row">
-			<p class="text-st">Grade summary</p>
+			<p class="text-st" id="g-sum-subject">Grade summary</p>
 			<!--make this unicode!-->
 			<button class="plain-text-button" onclick="close_grade_summary()">✖</button>
 		</div>
-		<p class="section" id="g-sum-subject">GRADE</p>
-		<div id="g-sum-container" class="g-container"></div>
-		<div class="g-row-odd">
-			<p class="g-label">Performance</p>
+
+		<div class="scroll-uy"/>
+		<div id="g-sum-container" class="g-sum-container">
+		<div class="name-row">
+			<div class="name-lgroup">
+			<label class="l" for="g-performance">Performance</label>
 			<input class="grade-input" type="number" id="g-performance"/>
+			</div>
+			<div class="name-lgroup">
+			<label class="l" for="g-activities">Activities</label>
+			<input id="g-activities" type="number" class="grade-input"/>
+			</div>
+			<div class="name-lgroup">
+			<label class="l" for="g-quizzes">Quizzes</label>
+			<input id="g-quizzes" type="number" class="grade-input"/>
+			</div>
 		</div>
-		<div class="g-row-even">
-			<p class="g-label">Activities</p>
-			<input class="grade-input" type="number" id="g-activities"/>
-		</div>
+
 		<div class="g-row-odd">
-			<p class="g-label">Quizzes</p>
-			<input class="grade-input" type="number" id="g-quizzes"/>
-		</div>
-		<div class="g-row-even">
 			<p class="g-label">Months Absent</p>
 			<input class="grade-input" type="number" id="g-absent"/>
 		</div>
-		<div class="g-row-odd">
-			<p class="g-label">Months Present</p>
-			<input class="grade-input" type="number" id="g-present"/>
+
 		</div>
+		</div>
+		<hr/>
 		<div class="g-row-average">
 			<p class="g-label">Total grade</p>
 			<input class="grade-input" type="number" id="g-total-grades" readonly="true"/>
 		</div>
-		<hr/>
 	</div>
 	</div>
 	<!-- Student input window -->
 	<div id="popup_bg" class="profile-popup">
 	<div class="popup-window">
 		<div class="title-row">
-			<p class="text-st">Student profile</p>
+			<p class="text-st" id="student-label">Student profile</p>
 			<!--make this unicode!-->
 			<button class="text-highlight-option" onclick="close_profile_display_save(s_student)">✔️</button>
 			<button class="plain-text-button" onclick="delete_student(s_student); close_profile_display()">🗑️</button>
 			<button class="plain-text-button" onclick="close_profile_display()">✖</button>
 		</div>
 		<!-- <hr/> -->
+		<p id="g-passed" class="text-passed">PASSED</p>
+		<div class="scroll-y"/>
 		<div class="name-row">
 			<div class="name-lgroup">
 			<label class="l" for="fname">First name</label>
@@ -82,19 +87,21 @@
 			<input id="schoolyear"/>
 			</div>
 		</div>
-
-		<p id="g-passed" class="text-passed">PASSED</p>
 		<!-- <div class="sections"> -->
 		<!-- 	<p class="filler">Grades</p> -->
 		<!-- </div> -->
 		<div id="g-container" class="g-container"></div>
+		</div>
 		<hr/>
-		<div class="g-row-average" id="g-avg-row">
-			<p class="g-label">Average</p>
+
+		<!-- <div class="scroll-y"/> -->
+		<div class="row" id="g-avg-row">
+			<p class="g-label"><b>Average</b></p>
 			<input class="grade-input" type="number" id="g-average" readonly="true"/>
 		</div>
 
-		<p>&#x2022; click on <b>Average</b> to recalculate.</p>
+		<!-- <p>&#x2022; click on <b>Average</b> to recalculate.</p> -->
+		<!-- </div> -->
 		<div class="row">
 			<!-- <button class="plain-text-button" onclick="close_profile_display()">Cancel</button> -->
 			<!-- <p class="filler"/> -->
@@ -106,17 +113,21 @@
 	<!-- END: Student input window -->
 
 	<!-- Login page -->
-	<div class="login-div" id="login-div">
-		<div class="s-section">
+	<div style="z-index: 0; position: absolute; width: 100%" id="login-div">
+	<div class="login-div">
+		<div class="s-section" style="padding: 10px">
 			<p class="text-st">
-			<u>G</u>rade
-			<u>M</u>anagement
-			<u>S</u>ystem
-			&mdash;
-			Login Site
+			Grade
+			Management
+			System
+			<br/>
+			&#x2022;
+			<br/>
+			Login
 			</p>
 		</div>
-		<div class="row">
+		<p class="login-error" id="pass-error-msg">Password error</p>
+		<div class="rowx" style="margin:auto; position: relative; align-items: flex-end">
 		<div class="name-lgroup"/>
 			<label class="l" for="username">Username</label>
 			<input id="username"/>
@@ -127,15 +138,18 @@
 		</div>
 		</div>
 		<button class="text-highlight-option" onclick='login();'>Login</button>
-		<p class="login-error" id="pass-error-msg">Password error</p>
 
+	</div>
 	</div>
 	<!-- END: Login page -->
 
 	<!-- Students list -->
+	<div class="s-list-div"/>
 	<div style="visibility: hidden;" id="s-list">
 		<div class="s-section">
-			<p class="text-st">Student List</p>
+			<p class="text-st">Student List Records</p>
+			<div class="name-lgroup">
+			<label for="arrangement">Arrange by</label>
 			<select class="text-highlight-option"
 				id="arrangement"
 				onchange="reload_student_list()">
@@ -148,21 +162,24 @@
 				<option value="first-name">
 				First name </option>
 			</select>
+			</div>
 			<!--<input type="radio" id="last-name" name="arrange_type"/>-->
 			<!--<label for="last-name">Last name</label>-->
 		</div>
-		<div class="s-container" id="student-con">
-		</div>
-		<div class="row"/>
+		<div class="s-list-btn-row"/>
 			<button class="text-highlight-option"
-				onclick='open_profile_display(new_student("", "", 0))'>New student</button>
+				onclick='open_profile_display(new_student("", "", 0))'>New ➕</button>
 			<button class="text-highlight-option"
-				onclick='save_data_local();'>Save data</button>
-			<label class="text-highlight-option" for="file-import" >Import data</label>
+				onclick='save_data_local();'>Save 💾</button>
+			<label class="text-highlight-option" for="file-import" >Import 📝</label>
 
 			<input style="display: none" type="file" id="file-import"
 				onchange='import_data();' multiple="false"/>
 		</div>
+		<div class="s-container" id="s-con">
+			<div class="scroll-y"  id="student-con" style="max-height: 51vh"/>
+		</div>
+	</div>
 	</div>
 	<!-- END: Students list -->
 </body>
